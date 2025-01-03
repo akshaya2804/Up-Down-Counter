@@ -1,0 +1,25 @@
+module tb_updown_counter;
+ reg Clk;
+ reg reset;
+ reg UpDown;
+ wire [3:0] Count;
+ updown_counter uut (
+ .Clk(Clk),
+ .reset(reset),
+ .UpDown(UpDown),
+ .Count(Count)
+ );
+ initial Clk = 0;
+ always #10 Clk = ~Clk;
+ initial begin
+ reset = 0;
+ UpDown = 1;
+ #200;
+UpDown = 0;
+ #200;
+ reset = 1;
+ UpDown = 0;
+ #100;
+ reset = 0;
+ end
+endmodule
